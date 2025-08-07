@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { client, Preference } = require('../mercado-pago');
 
-router.post('/create_preference', async (req, res) => {
+router.post('/create-preference', async (req, res) => {
   try {
     const { items } = req.body;
     const FRONTEND_URL = process.env.FRONTEND_URL;
@@ -35,7 +35,7 @@ router.post('/create_preference', async (req, res) => {
   }
 });
 
-router.post('/process_payment', async (req, res) => {
+router.post('/process-payment', async (req, res) => {
   try {
     const paymentData = req.body;
     console.log('Payment received:', paymentData);
