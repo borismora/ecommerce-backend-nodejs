@@ -24,6 +24,14 @@ describe('Auth Routes', () => {
     jest.clearAllMocks();
   });
 
+  beforeAll(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => { });
+  });
+
+  afterAll(() => {
+    console.error.mockRestore();
+  });
+
   describe('POST /auth/register', () => {
     it('should return 400 if email or password is missing', async () => {
       const res = await request(app).post('/auth/register').send({ email: '' });
@@ -124,5 +132,3 @@ describe('Auth Routes', () => {
     });
   });
 });
-
-// We recommend installing an extension to run jest tests.
