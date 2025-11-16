@@ -1,8 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// prisma/schema.prisma
+// This is your Prisma schema file
+// Learn more: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -13,10 +11,84 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ======================================
+// USERS
+// ======================================
 model User {
   id        String   @id @default(uuid())
   email     String   @unique
   password  String
   name      String?
+  createdAt DateTime @default(now())
+
+  // Relaciones
+  orders Order[]
+}
+
+// ======================================
+// PRODUCTS
+// ======================================
+model Product {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  photo     String?
+  price     Int
+  category  String?
+  brand     String?
+  createdAt DateTime @default(now())
+
+  // Relaciones
+  orderItems OrderItem[]
+}
+
+// ======================================
+// ORDERS
+// ======================================
+model Order {
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  totalPrice Int
+  createdAt  DateTime @default(now())
+
+  // Relaciones
+  orderItems OrderItem[]
+}
+
+// ======================================
+// ORDER ITEMS
+// ======================================
+model OrderItem {
+  id        String   @id @default(uuid())
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
+  quantity  Int
+  price     Int
+  createdAt DateTime @default(now())
+}
+
+// ======================================
+// CATEGORIES
+// ======================================
+model Category {
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+
+  // Relaciones
+  brands Brand[]
+}
+
+// ======================================
+// BRANDS
+// ======================================
+model Brand {
+  id         String   @id @default(uuid())
+  name       String
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
   createdAt DateTime @default(now())
 }
