@@ -38,7 +38,6 @@ router.post('/create-preference', async (req, res) => {
 router.post('/process-payment', async (req, res) => {
   try {
     const paymentData = req.body;
-    console.log('Payment received:', paymentData);
     res.status(200).json({ status: 'received' });
   } catch (err) {
     console.error(err);

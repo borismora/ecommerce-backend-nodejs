@@ -11,7 +11,6 @@ router.get('/', async (req, res) => {
   if (brand && brand.trim() !== '') filters.brand = brand;
 
   if (search && search.trim() !== '') {
-    console.log(search)
     filters.OR = [
       { name: { contains: search, mode: 'insensitive' } },
       { brand: { contains: search, mode: 'insensitive' } },
