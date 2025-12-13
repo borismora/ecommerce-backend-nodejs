@@ -24,7 +24,7 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/products', productsRoutes);
 app.use('/mercado-pago', mercadoPagoRoutes);
-app.use('/categories', categoriesRoutes);
+app.use('/api/categories', categoriesRoutes);
 app.use('/brands', brandsRoutes);
 
 module.exports = app;
