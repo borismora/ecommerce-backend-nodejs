@@ -20,10 +20,10 @@ app.use(cors({
 app.use(express.json());
 
 // Routes
-app.use('/auth', authRoutes);
-app.use('/products', productsRoutes);
-app.use('/mercado-pago', mercadoPagoRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/products', productsRoutes);
+app.use('/api/mercado-pago', mercadoPagoRoutes);
 app.use('/api/categories', categoriesRoutes);
-app.use('/brands', brandsRoutes);
+app.use('/api/brands', brandsRoutes);
 
 module.exports = app;
